@@ -25,29 +25,34 @@ class MainActivity : AppCompatActivity() {
             binding.inputWebsite.setText(data.optString("website"))
         }
 
-        // Збереження даних у файл
+        // Обробник кнопки "Зберегти"
         binding.buttonSave.setOnClickListener {
-            val data = JSONObject().apply {
-                put("brand", binding.inputBrand.text.toString())
-                put("year", binding.inputYear.text.toString())
-                put("engine", binding.inputEngine.text.toString())
-                put("email", binding.inputEmail.text.toString())
-                put("website", binding.inputWebsite.text.toString())
-            }
-            saveDataToFile(data)
+            saveDataToFile()
         }
     }
 
-    private fun saveDataToFile(data: JSONObject) {
-        val fileName = "data.json"
-        val file = File(filesDir, fileName)
+    override fun onPause() {
+        super.onPause()
+        saveDataToFile() // Автозбереження при переході у фоновий режим
+    }
+
+    private fun saveDataToFile() {
+        val data = JSONObject().apply {
+            put("brand", binding.inputBrand.text.toString())
+            put("year", binding.inputYear.text.toString())
+            put("engine", binding.inputEngine.text.toString())
+            put("email", binding.inputEmail.text.toString())
+            put("website", binding.inputWebsite.text.toString())
+        }
+
+        val file = File(filesDir, "data.json")
         file.writeText(data.toString())
+
         Toast.makeText(this, "Дані збережено", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadData(): JSONObject? {
-        val fileName = "data.json"
-        val file = File(filesDir, fileName)
+        val file = File(filesDir, "data.json")
         return if (file.exists()) {
             val content = file.readText()
             JSONObject(content)
@@ -56,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 
 
 
