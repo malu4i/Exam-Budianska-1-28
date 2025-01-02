@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Exam-Budianska-1-28</string>
-
+    <string name="app_name">Ваш Додаток</string>
     <string name="hint_brand">Марка</string>
     <string name="hint_year">Дата випуску</string>
     <string name="hint_engine">Об’єм двигуна</string>
@@ -9,6 +8,4 @@
     <string name="button_save">Зберегти</string>
     <string name="button_upload_photo">Завантажити фото</string>
     <string name="button_search_auto_ria">Пошук на Auto.RIA</string>
-
-
 </resources>

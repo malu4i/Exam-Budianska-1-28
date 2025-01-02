@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Twoja Aplikacja</string>
+    <string name="hint_brand">Marka</string>
+    <string name="hint_year">Data produkcji</string>
+    <string name="hint_engine">Pojemność silnika</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_website">Link do strony</string>
+    <string name="button_save">Zapisz</string>
+    <string name="button_upload_photo">Prześlij zdjęcie</string>
+    <string name="button_search_auto_ria">Szukaj w Auto.RIA</string>
+</resources>
