@@ -1,42 +1,38 @@
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.exam_budianska_1_28.databinding.ActivityMainBinding
 import org.json.JSONObject
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val inputBrand = findViewById<EditText>(R.id.input_brand)
-        val inputYear = findViewById<EditText>(R.id.input_year)
-        val inputEngine = findViewById<EditText>(R.id.input_engine)
-        val inputEmail = findViewById<EditText>(R.id.input_email)
-        val inputWebsite = findViewById<EditText>(R.id.input_website)
-        val saveButton = findViewById<Button>(R.id.button_save)
+        // Ініціалізація ViewBinding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Завантаження даних із файлу при запуску
         loadData()?.let { data ->
-            inputBrand.setText(data.optString("brand"))
-            inputYear.setText(data.optString("year"))
-            inputEngine.setText(data.optString("engine"))
-            inputEmail.setText(data.optString("email"))
-            inputWebsite.setText(data.optString("website"))
+            binding.inputBrand.setText(data.optString("brand"))
+            binding.inputYear.setText(data.optString("year"))
+            binding.inputEngine.setText(data.optString("engine"))
+            binding.inputEmail.setText(data.optString("email"))
+            binding.inputWebsite.setText(data.optString("website"))
         }
 
         // Збереження даних у файл
-        saveButton.setOnClickListener {
+        binding.buttonSave.setOnClickListener {
             val data = JSONObject().apply {
-                put("brand", inputBrand.text.toString())
-                put("year", inputYear.text.toString())
-                put("engine", inputEngine.text.toString())
-                put("email", inputEmail.text.toString())
-                put("website", inputWebsite.text.toString())
+                put("brand", binding.inputBrand.text.toString())
+                put("year", binding.inputYear.text.toString())
+                put("engine", binding.inputEngine.text.toString())
+                put("email", binding.inputEmail.text.toString())
+                put("website", binding.inputWebsite.text.toString())
             }
             saveDataToFile(data)
         }
@@ -60,5 +56,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 
 

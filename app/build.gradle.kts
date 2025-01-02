@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.exam_budianska_1_28"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.exam_budianska_1_28"
@@ -32,6 +32,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    // Увімкнення ViewBinding
+    buildFeatures {
+        viewBinding = true
     }
 }
 
