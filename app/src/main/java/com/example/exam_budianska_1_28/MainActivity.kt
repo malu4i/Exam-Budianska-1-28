@@ -1,3 +1,5 @@
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,21 @@ class MainActivity : AppCompatActivity() {
         binding.buttonSave.setOnClickListener {
             saveDataToFile()
         }
+
+        // Обробник кнопки "Відкрити сайт"
+        binding.buttonOpenWebsite.setOnClickListener {
+            val websiteUrl = binding.inputWebsite.text.toString()
+            if (websiteUrl.isNotEmpty() && android.util.Patterns.WEB_URL.matcher(websiteUrl).matches()) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl))
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "Не вдалося відкрити браузер", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Введіть коректне посилання на сайт!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onPause() {
@@ -47,9 +64,8 @@ class MainActivity : AppCompatActivity() {
 
         val file = File(filesDir, "data.json")
         file.writeText(data.toString())
-            //// Викликаємо довге Toast-повідомлення
+        // Викликаємо довге Toast-повідомлення
         Toast.makeText(this, "Дані успішно збережено!", Toast.LENGTH_LONG).show()
-
     }
 
     private fun loadData(): JSONObject? {
@@ -62,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 
 
 

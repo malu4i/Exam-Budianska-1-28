@@ -74,5 +74,12 @@
             android:text="Зберегти"
             android:marginTop="16dp" />
 
+        <Button
+            android:id="@+id/button_open_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Відкрити сайт"
+            android:layout_marginTop="16dp" />
+
     </LinearLayout>
 </ScrollView>
