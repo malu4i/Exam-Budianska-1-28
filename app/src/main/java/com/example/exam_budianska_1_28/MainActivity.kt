@@ -47,8 +47,9 @@ class MainActivity : AppCompatActivity() {
 
         val file = File(filesDir, "data.json")
         file.writeText(data.toString())
+            //// Викликаємо довге Toast-повідомлення
+        Toast.makeText(this, "Дані успішно збережено!", Toast.LENGTH_LONG).show()
 
-        Toast.makeText(this, "Дані збережено", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadData(): JSONObject? {
