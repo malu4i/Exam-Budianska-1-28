@@ -1,15 +1,29 @@
+package com.example.exam_budianska_1_28
+
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.exam_budianska_1_28.databinding.ActivityMainBinding
 import org.json.JSONObject
 import java.io.File
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    // Запуск галереї для вибору фото
+    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            binding.photoView.setImageURI(uri)
+        } else {
+            Toast.makeText(this, "Фото не було вибрано", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,24 +41,30 @@ class MainActivity : AppCompatActivity() {
             binding.inputWebsite.setText(data.optString("website"))
         }
 
-        // Обробник кнопки "Зберегти"
+        // Обробка кліку кнопки "Зберегти"
         binding.buttonSave.setOnClickListener {
             saveDataToFile()
         }
 
-        // Обробник кнопки "Відкрити сайт"
-        binding.buttonOpenWebsite.setOnClickListener {
-            val websiteUrl = binding.inputWebsite.text.toString()
-            if (websiteUrl.isNotEmpty() && android.util.Patterns.WEB_URL.matcher(websiteUrl).matches()) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl))
-                if (intent.resolveActivity(packageManager) != null) {
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this, "Не вдалося відкрити браузер", Toast.LENGTH_SHORT).show()
-                }
+        // Обробка кліку кнопки "Завантажити фото"
+        binding.buttonUploadPhoto.setOnClickListener {
+            pickImageLauncher.launch("image/*")
+        }
+
+        // Обробка кліку кнопки для пошуку сайту
+        binding.buttonSearchAutoRia.setOnClickListener {
+            val website = binding.inputWebsite.text.toString()
+            if (website.isNotBlank()) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(website))
+                startActivity(intent)
             } else {
-                Toast.makeText(this, "Введіть коректне посилання на сайт!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Будь ласка, введіть посилання на сайт", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // Налаштування вибору дати
+        binding.inputYear.setOnClickListener {
+            showDatePickerDialog()
         }
     }
 
@@ -64,7 +84,6 @@ class MainActivity : AppCompatActivity() {
 
         val file = File(filesDir, "data.json")
         file.writeText(data.toString())
-        // Викликаємо довге Toast-повідомлення
         Toast.makeText(this, "Дані успішно збережено!", Toast.LENGTH_LONG).show()
     }
 
@@ -77,9 +96,18 @@ class MainActivity : AppCompatActivity() {
             null
         }
     }
+
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, _, _ ->
+            binding.inputYear.setText("$selectedYear")
+        }, year, month, day)
+
+        datePickerDialog.show()
+    }
 }
-
-
-
-
 

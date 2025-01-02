@@ -13,41 +13,47 @@
         <EditText
             android:id="@+id/input_brand"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:hint="Марка"
-            android:inputType="text" />
+            android:inputType="textCapWords"
+            android:autofillHints="username" />
 
         <!-- Поле для вводу дати випуску -->
         <EditText
             android:id="@+id/input_year"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Дата випуску"
-            android:inputType="date" />
+            android:layout_height="60dp"
+            android:hint="Дата випуску (рік)"
+            android:inputType="number"
+            android:focusable="false"
+            android:autofillHints="year" />
 
         <!-- Поле для вводу об’єму двигуна -->
         <EditText
             android:id="@+id/input_engine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Об’єм двигуна"
-            android:inputType="numberDecimal" />
+            android:layout_height="60dp"
+            android:hint="Об'єм двигуна"
+            android:inputType="numberDecimal"
+            android:autofillHints="engine" />
 
         <!-- Поле для вводу email -->
         <EditText
             android:id="@+id/input_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress" />
 
         <!-- Поле для вводу посилання на сайт -->
         <EditText
             android:id="@+id/input_website"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:hint="Посилання на сайт"
-            android:inputType="textUri" />
+            android:inputType="textUri"
+            android:autofillHints="url" />
 
         <!-- Поле для завантаження фото -->
         <ImageView
@@ -59,27 +65,29 @@
             android:background="#CCCCCC"
             android:contentDescription="Фото об'єкта" />
 
-        <!-- Кнопка для завантаження фото -->
         <Button
             android:id="@+id/button_upload_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Завантажити фото" />
+            android:text="@string/button_upload_photo"
+            android:layout_marginTop="8dp" />
 
         <!-- Кнопка для збереження -->
         <Button
             android:id="@+id/button_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Зберегти"
-            android:marginTop="16dp" />
+            android:text="@string/button_save"
+            android:layout_marginTop="16dp" />
 
+        <!-- Кнопка для пошуку на Auto.RIA -->
         <Button
-            android:id="@+id/button_open_website"
+            android:id="@+id/button_search_auto_ria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Відкрити сайт"
+            android:text="@string/button_search_auto_ria"
             android:layout_marginTop="16dp" />
 
     </LinearLayout>
 </ScrollView>
+

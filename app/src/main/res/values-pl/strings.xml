@@ -7,5 +7,5 @@
     <string name="hint_website">Link do strony</string>
     <string name="button_save">Zapisz</string>
     <string name="button_upload_photo">Prześlij zdjęcie</string>
-    <string name="button_search_auto_ria">Szukaj w Auto.RIA</string>
+    <string name="button_search_auto_ria">WebSite</string>
 </resources>
